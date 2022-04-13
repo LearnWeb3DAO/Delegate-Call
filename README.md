@@ -267,6 +267,6 @@ Use stateless library contracts which means that the contracts to which you dele
 
 
 
-**References**
-- https://medium.com/coinmonks/delegatecall-calling-another-contract-function-in-solidity-b579f804178c
-- https://solidity-by-example.org/
+# References
+- [Delegatee call](https://medium.com/coinmonks/delegatecall-calling-another-contract-function-in-solidity-b579f804178c)
+- [Solidity by Example](https://solidity-by-example.org/)
