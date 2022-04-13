@@ -1,4 +1,4 @@
-## Delegate Call Solidity
+# Delegate Call Solidity
 
 
 Delegate call is a method in solidity which is used to call a function in target contract from an original contract but when the function is executed in the target contract, the content if not on the user who executed the contract but on the original contract
@@ -7,7 +7,7 @@ Through this tutorial, we will learn why its important to correctly understand h
 
 ---
 
-# What is a Delegate Call?
+## What is a Delegate Call?
 
 Lets start by understanding what a delegate call is, its a way for one smart contract to interact with other smart contracts.
 
