@@ -24,7 +24,7 @@ We have two contracts `student.sol` and `calculator.sol`. We dont know the ABI o
 
 Lets see how we can use `delegateCall` to call this function from `student.sol`
 
-```solidity=
+```solidity
 pragma solidity ^0.8.4;
 
 contract Student {
@@ -42,7 +42,7 @@ contract Student {
 }
 ```
 
-```solidity=
+```solidity
 pragma solidity ^0.8.4;
 
 contract Calculator {
@@ -71,7 +71,7 @@ But remember when the values are getting assigned in `Calcultor` contract, they 
 You know from the previous lessons that each variable slot in solidity is of 32 bytes which is 256 bits. And when we used delegatecall from student to calculator we used the storage of student and not of calculator but the problem is that eventhough we are using the storage of student, the slot numbers are based on the calculator contract and in this case when you assign a value to `result` in the `add` function of `Calculator.sol`, you are actually assigning the value to  `s` which is Storage type variable in the student contract which is not what we want. We want to assign the value of result to the `result` variable in `Student.sol`. To fix this, you can easily just change the ordering of variables in the `Student.sol` to as follows:
 
 
-```solidity=
+```solidity
 
 contract Student {
     uint public result;
@@ -129,7 +129,7 @@ and press `enter` for all the questions.
 
 Now  create a contract named `Attack.sol` within the `contracts` directory and write thee following lines of code
 
-```solidity=
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
@@ -182,7 +182,7 @@ contract Good {
 
 After creating `Good.sol` the last file contract we will create inside the `contracts` directory is `Helper.sol`
 
-```solidity=
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
@@ -215,7 +215,7 @@ Lets try actually executing this attack using code
 
 Inside the `test` folder create a new file named `attack.js` and add the following lines of code
 
-```javascript=
+```javascript
 const { expect } = require("chai");
 const { BigNumber } = require("ethers");
 const { ethers, waffle } = require("hardhat");
@@ -253,7 +253,7 @@ describe("Attack", function () {
 
 To execute the test to verify that the owner of good contract was indeed changes, in your terminal pointing to the directory which contains all your code for this level execute the following command
 
-```bash=
+```bash
 npx hardhat test
 ```
 
