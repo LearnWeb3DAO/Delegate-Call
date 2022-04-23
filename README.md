@@ -64,7 +64,7 @@ All this when concatenated is passed into the `delegatecall` method which is cal
 
 The actual addition part is not that interesting, what's interesting is that the `Calculator` contract actually sets some state variables. But remember when the values are getting assigned in `Calcultor` contract, they are actually getting assigned to the storage of the `Student` contract because deletgatecall uses the storage of the original contract when executing the function in the target contract. So what exactly will happen is as follows:
 
-![](https://i.imgur.com/5y9V8UJ.png)
+![](https://i.imgur.com/oVhXQas.png)
 
 You know from the previous lessons that each variable slot in solidity is of 32 bytes which is 256 bits. And when we used `.delegatecall()` from `Student` to `Calculator` we used the storage of `Student` and not of `Calculator` but the problem is that even though we are using the storage of `Student`, the slot numbers are based on the calculator contract and in this case when you assign a value to `result` in the `add` function of `Calculator.sol`, you are actually assigning the value to  `mySum` which in the student contract. 
 
