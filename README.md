@@ -122,8 +122,6 @@ Lets build an example where you can experience how the the attack happens.
 
 Now you have a hardhat project ready to go!
 
-and press `Enter` for all the questions.
-
 Let's start off by creating an innocent looking contract - `Good.sol`. It will contain the address of the `Helper` contract, and a variable called `owner`. The function `setNum` will do a `delegatecall()` to the `Helper` contract.
 
 ```solidity
