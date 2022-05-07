@@ -58,7 +58,7 @@ contract Calculator {
 
 Our `Student` contract here has a function `addTwoNumbers` which takes an address, and two numbers to add together. Instead of executing it directly, it tries to do a `.delegatecall()` on the address for a function `add` which takes two numbers. 
 
-We used `abi.encodeWithSelector` which first hashes and then takes the first 4 bytes out of the function's name and type of arguments, in our case it did the following: `(bytes4(keccak256(add(uint,uint))` and then appends the parameters - `a`, `b`  to the 4 bytes of the function selector. These are 32 bytes long each (32 bytes = 256 bits, which is what `uint256` can store).
+We used `abi.encodeWithSignature`, also the same as `abi.encodeWithSelector`, which first hashes and then takes the first 4 bytes out of the function's name and type of arguments. In our case it did the following: `(bytes4(keccak256(add(uint,uint))` and then appends the parameters - `a`, `b`  to the 4 bytes of the function selector. These are 32 bytes long each (32 bytes = 256 bits, which is what `uint256` can store).
 
 All this when concatenated is passed into the `delegatecall` method which is called upon the address of the calculator contract.
 
