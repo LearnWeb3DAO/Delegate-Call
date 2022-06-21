@@ -14,12 +14,18 @@ Lets start by understanding how this works.
 
 The important thing to note when using `.delegatecall()` is that the context the original contract is passed to the target, and all state changes in the target contract reflect on the original contract's state and not on the target contract's state even though the function is being executed on the target contract.
 
+<Quiz questionId="f0a4b9c6-e18f-436c-a417-20ac744162ca" />
+
 Hmm, not that clear right 🥲, I feel you. So lets try understanding by an example.
 
 In Ethereum, a function can be represented as `4 + 32*N` bytes where `4 bytes` are for the function selector and the `32*N` bytes are for function arguments.
 
 - Function Selector: To get the function selector, we hash the function's name along with the type of its arguments without the empty space eg. for something like `putValue(uint value)`, you will hash `putValue(uint)` using `keccak-256` which is a hashing function used by Ethereum and then take its first 4 bytes. To understand keccak-256 and hashing better, I suggest you watch this [video](https://www.youtube.com/watch?v=rxZR3ITZlzE)
 - Function Argument: Convert each argument into a hex string with a fixed length of 32 bytes and concatenate them. 
+
+<Quiz questionId="8714cc52-9d26-47fb-aff0-355ea7a2d50e" />
+<Quiz questionId="b350a0d5-562c-43e9-88b9-f114bb4600c8" />
+<Quiz questionId="87906629-bd28-4947-b523-bec77b8f2a2a" />
 
 We have two contracts `Student.sol` and `Calculator.sol`. We dont know the ABI of `Calculator.sol` but we know that their exists an `add` function which takes in two `uint`'s and adds them up within the `Calculator.sol`
 
@@ -66,6 +72,8 @@ The actual addition part is not that interesting, what's interesting is that the
 
 ![](https://i.imgur.com/oVhXQas.png)
 
+<Quiz questionId="bd4b53a7-05a7-4290-b34e-291815a9ddb7" />
+
 You know from the previous lessons that each variable slot in solidity is of 32 bytes which is 256 bits. And when we used `.delegatecall()` from `Student` to `Calculator` we used the storage of `Student` and not of `Calculator` but the problem is that even though we are using the storage of `Student`, the slot numbers are based on the calculator contract and in this case when you assign a value to `result` in the `add` function of `Calculator.sol`, you are actually assigning the value to  `mySum` which in the student contract. 
 
 This can be problematic, because storage slots can have variables of different data types. What if the `Student` contract instead had values defined in this order?
@@ -83,6 +91,8 @@ In this case, the `address` variable would actually end up becoming the value of
 ## Actual Use Cases
 
 `.delegatecall()` is heavily used within proxy (upgradeable) contracts. Since smart contracts are not upgradeable by default, the way to make them upgradeable is typically by having one storage contract which does not change, which contains an address for an implementation contract. If you wanted to update your contract code, you change the address of the implementation contract to something new. The storage contract makes all calls using `.delegatecall()` which allows to run different versions of the code while maintaining the same persisted storage over time, no matter how many implementation contracts you change. Therefore, the logic can change, but the data is never fragmented.
+
+<Quiz questionId="2bb0f6c2-c8fb-4d5b-9b2d-12ee3827ac90" />
 
 ## Attack using delegatecall 
 
@@ -255,8 +265,15 @@ If your tests are passing the owner address of good contract was indeed changed,
 Lets goo 🚀🚀
 
 # Prevention
-Use stateless library contracts which means that the contracts to which you deletegate the call should only be used for execution of logic and should not maintain state.
+Use stateless library contracts which means that the contracts to which you delegate the call should only be used for execution of logic and should not maintain state. This way, it is not possible for functions in the library to modify the state of the calling contract.
+
+<Quiz questionId="d4c2dc50-77ab-4b54-a4ab-11983a835ee6" />
 
 # References
 - [Delegate call](https://medium.com/coinmonks/delegatecall-calling-another-contract-function-in-solidity-b579f804178c)
 - [Solidity by Example](https://solidity-by-example.org/)
+
+<Quiz questionId="1ad4680d-8410-41e9-998f-278e24250fa4" />
+<Quiz questionId="a57dfe3d-ff0e-4b1d-8374-55eabd258e49" />
+
+<SubmitQuiz />
