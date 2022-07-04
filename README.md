@@ -169,7 +169,7 @@ contract Helper {
 }
 ```
 
-Now create a contract named `Attack.sol` within the `contracts` directory and write thee following lines of code. We will understand how it works step by step.
+Now create a contract named `Attack.sol` within the `contracts` directory and write the following lines of code. We will understand how it works step by step.
 
 ```solidity
 //SPDX-License-Identifier: MIT
