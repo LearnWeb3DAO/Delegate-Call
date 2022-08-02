@@ -68,7 +68,7 @@ We used `abi.encodeWithSignature`, also the same as `abi.encodeWithSelector`, wh
 
 All this when concatenated is passed into the `delegatecall` method which is called upon the address of the calculator contract.
 
-The actual addition part is not that interesting, what's interesting is that the `Calculator` contract actually sets some state variables. But remember when the values are getting assigned in `Calcultor` contract, they are actually getting assigned to the storage of the `Student` contract because deletgatecall uses the storage of the original contract when executing the function in the target contract. So what exactly will happen is as follows:
+The actual addition part is not that interesting, what's interesting is that the `Calculator` contract actually sets some state variables. But remember when the values are getting assigned in `Calculator` contract, they are actually getting assigned to the storage of the `Student` contract because deletgatecall uses the storage of the original contract when executing the function in the target contract. So what exactly will happen is as follows:
 
 ![](https://i.imgur.com/oVhXQas.png)
 
