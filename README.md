@@ -12,7 +12,7 @@ Through this tutorial, we will learn why its important to correctly understand h
 
 Lets start by understanding how this works.
 
-The important thing to note when using `.delegatecall()` is that the context the original contract is passed to the target, and all state changes in the target contract reflect on the original contract's state and not on the target contract's state even though the function is being executed on the target contract.
+The important thing to note when using `.delegatecall()` is that the context of the original contract is passed to the target, and all state changes in the target contract reflect on the original contract's state and not on the target contract's state even though the function is being executed on the target contract.
 
 <Quiz questionId="f0a4b9c6-e18f-436c-a417-20ac744162ca" />
 
@@ -202,7 +202,7 @@ contract Attack {
 
 The attacker will first deploy the `Attack.sol` contract and will take the address of a `Good` contract in the constructor. He will then call the `attack` function which will further initially call the setNum function present inside `Good.sol`
 
-Intresting point to note is the argument with which the setNum is initially called, its an address typecasted into a uint256, which is it's own address. After `setNum` function within the `Good.sol` contract recieves the address as a uint, it further does a `delegatecall` to the `Helper` contract because right now the `helper` variable is set to the address of the `Helper` contract.
+Interesting point to note is that the argument with which the setNum is initially called, its an address typecasted into a uint256, which is it's own address. After `setNum` function within the `Good.sol` contract recieves the address as a uint, it further does a `delegatecall` to the `Helper` contract because right now the `helper` variable is set to the address of the `Helper` contract.
 
 Within the `Helper` contract when the setNum is executed, it sets the `_num` which in our case right now is the address of `Attack.sol` typecasted into a uint into num. Note that because `num` is located at `Slot 0` of `Helper` contract, it will actually assign the address of `Attack.sol` to `Slot 0` of  `Good.sol`. Woops... You may see where this is going. `Slot 0` of `Good` is the `helper` variable, which means, the attacker has successfully been able to update the `helper` address variable to it's own contract now.
 
